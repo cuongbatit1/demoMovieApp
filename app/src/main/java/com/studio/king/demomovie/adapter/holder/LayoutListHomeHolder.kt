@@ -81,7 +81,7 @@ class LayoutListHomeHolder(itemView: ViewItemRecyclerviewHolderBinding, private 
         }
     }
 
-    private val mListMovieAdapter: ListMovieAdapter by lazy { ListMovieAdapter() }
+    private val mListMovieAdapter: ListMovieAdapter by lazy { ListMovieAdapter(onActionItem) }
 
     override fun setData(
         t: Any?,

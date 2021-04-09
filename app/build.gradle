@@ -7,6 +7,15 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        sign {
+            storeFile file('../keystores/moviekey.keystore')
+            keyAlias 'moviekey'
+            keyPassword '123456'
+            storePassword '123456'
+        }
+    }
+
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
     useLibrary 'org.apache.http.legacy'
@@ -36,6 +45,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.sign
         }
     }
 
@@ -163,5 +173,7 @@ dependencies {
 
     //noinspection LifecycleAnnotationProcessorWithJava8
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.github.tcqq:viewbehavior:1.0.1'
 
 }

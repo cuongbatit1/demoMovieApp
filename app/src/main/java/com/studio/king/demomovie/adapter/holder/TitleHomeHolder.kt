@@ -1,5 +1,7 @@
 package com.studio.king.demomovie.adapter.holder
 
+import android.graphics.Color
+import android.view.View
 import com.squareup.picasso.Picasso
 import com.studio.king.demomovie.adapter.base.BaseAdapterAny
 import com.studio.king.demomovie.adapter.base.LifecycleViewHolder
@@ -21,11 +23,28 @@ class TitleHomeHolder(itemView: ViewItemTitleHolderBinding) : LifecycleViewHolde
         if (t is TitleModel) {
             mTitleModel = t
             buildUITitle()
+            buildUIIcon()
+            buildUIBackGround()
         }
 
     }
 
     private fun buildUITitle() {
         binding.textTitleHolder.text = mTitleModel?.title ?: ""
+    }
+
+    private fun buildUIIcon() {
+        if (mTitleModel?.isIcon != null && mTitleModel!!.isIcon) {
+            binding.iconTitleHolder.visibility = View.VISIBLE
+        } else {
+            binding.iconTitleHolder.visibility = View.GONE
+        }
+    }
+    private fun buildUIBackGround() {
+        if (mTitleModel?.isBackground != null && mTitleModel!!.isBackground) {
+            binding.root.setBackgroundColor(Color.parseColor("#F8F8F8"))
+        } else {
+            binding.root.setBackgroundColor(Color.TRANSPARENT)
+        }
     }
 }

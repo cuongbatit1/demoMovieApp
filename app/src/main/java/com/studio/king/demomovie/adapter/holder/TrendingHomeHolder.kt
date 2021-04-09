@@ -8,9 +8,10 @@ import com.studio.king.demomovie.model.MovieModel
 import com.studio.king.demomovie.model.getBackdropPath
 import com.studio.king.demomovie.model.getPosterPath
 import com.studio.king.demomovie.provider.PicassoProvider
+import com.studio.king.demomovie.utils.setSingleClick
 import org.koin.core.component.KoinComponent
 
-class TrendingHomeHolder(itemView: ViewItemTrendingHomeHolderBinding) : LifecycleViewHolder(itemView.root),
+class TrendingHomeHolder(itemView: ViewItemTrendingHomeHolderBinding, private val onActionItem: (data: Any?) -> Unit) : LifecycleViewHolder(itemView.root),
     KoinComponent {
 
     private val binding: ViewItemTrendingHomeHolderBinding = itemView
@@ -23,6 +24,7 @@ class TrendingHomeHolder(itemView: ViewItemTrendingHomeHolderBinding) : Lifecycl
         if (t is MovieModel) {
             mMovieModel = t
             buildUIImage()
+            buildUIClickItem()
         }
 
     }
@@ -32,6 +34,12 @@ class TrendingHomeHolder(itemView: ViewItemTrendingHomeHolderBinding) : Lifecycl
             PicassoProvider.get().load(mMovieModel?.getBackdropPath()).fit().placeholder(R.drawable.placeholder).error(R.drawable.image_error).into(binding.imageTrendingHome)
         } else {
             binding.imageTrendingHome.setImageResource(R.drawable.image_error)
+        }
+    }
+
+    private fun buildUIClickItem() {
+        binding.layoutImageTrendingHome.setSingleClick {
+            onActionItem.invoke(mMovieModel)
         }
     }
 }

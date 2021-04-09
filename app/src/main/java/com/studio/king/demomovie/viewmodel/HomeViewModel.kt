@@ -165,7 +165,7 @@ class HomeViewModel(private val mHomeRepository: HomeRepository) : ViewModel(), 
             page = 1
             totalPage = null
             layoutType = 0
-            typeData = TypeDataHome.TYPE_POPULAR
+            typeData = TypeDataHome.TYPE_TOP_RATED
             isScrollEnd = false
             listMovie = null
             currentPosition = 0
@@ -176,7 +176,7 @@ class HomeViewModel(private val mHomeRepository: HomeRepository) : ViewModel(), 
             page = 1
             totalPage = null
             layoutType = 0
-            typeData = TypeDataHome.TYPE_POPULAR
+            typeData = TypeDataHome.TYPE_UPCOMING
             isScrollEnd = false
             listMovie = null
             currentPosition = 0

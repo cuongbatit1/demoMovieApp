@@ -31,6 +31,15 @@ interface TypeLayoutHome {
     }
 }
 
+interface TypeLayoutDetailMovie {
+    companion object {
+        const val TYPE_TITLE = 0
+        const val TYPE_RATE = 1
+        const val TYPE_TITLE_DETAIL = 2
+        const val TYPE_WRITE_A_COMMENT = 3
+    }
+}
+
 interface TypeLayoutMovie {
     companion object {
         const val TYPE_MOVIE = 0

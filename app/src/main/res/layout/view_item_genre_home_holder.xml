@@ -17,7 +17,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:cardElevation="@dimen/_5dp"
         app:cardCornerRadius="@dimen/_6dp"
-        tools:cardBackgroundColor="@color/red">
+        tools:cardBackgroundColor="@color/red"
+        android:foreground="?selectableItemBackground">
 
         <ImageView
             android:id="@+id/image_genre_home"

@@ -18,7 +18,8 @@
         app:cardElevation="@dimen/_5dp"
         app:cardCornerRadius="@dimen/_6dp"
         tools:cardBackgroundColor="@color/red"
-        android:layout_marginBottom="@dimen/_10dp">
+        android:layout_marginBottom="@dimen/_10dp"
+        android:foreground="?selectableItemBackground">
 
         <ImageView
             android:id="@+id/image_movie_home"

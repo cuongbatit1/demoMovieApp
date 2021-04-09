@@ -11,4 +11,8 @@
         <item name="android:windowBackground">@color/color_bg_fragment</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.DemoMovie.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.DemoMovie.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

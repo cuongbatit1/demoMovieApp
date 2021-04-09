@@ -1,7 +1,9 @@
 package com.studio.king.demomovie.navigator
 
+import com.studio.king.demomovie.fragment.FragDetailMovie
 import com.studio.king.demomovie.fragment.FragHome
 import com.studio.king.demomovie.fragment.FragSplashScreen
+import com.studio.king.demomovie.model.MovieModel
 
 
 class NavigatorScreen(){
@@ -24,14 +26,14 @@ class NavigatorScreen(){
         mFragNavigatorController.clearBackStack()
         mFragNavigatorController.replaceFragment(frag)
     }
-//
-//    fun showFragLogin(isBackStack: Boolean = false) {
-//        val fragLogin = FragLogin.newInstance()
-//        if (isBackStack) {
-//            mFragNavigatorController.clearBackStack()
-//            mFragNavigatorController.replaceFragment(fragLogin)
-//        } else {
-//            mFragNavigatorController.pushFragment(fragLogin)
-//        }
-//    }
+
+    fun showFragDetailMovie(isBackStack: Boolean = false, itemMovie : MovieModel? = null) {
+        val frag = FragDetailMovie.newInstance(itemMovie)
+        if (isBackStack) {
+            mFragNavigatorController.clearBackStack()
+            mFragNavigatorController.replaceFragment(frag)
+        } else {
+            mFragNavigatorController.pushFragment(frag)
+        }
+    }
 }

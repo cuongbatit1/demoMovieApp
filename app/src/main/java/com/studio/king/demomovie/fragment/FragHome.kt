@@ -14,12 +14,17 @@ import com.studio.king.demomovie.adapter.HomeAdapter
 import com.studio.king.demomovie.base.BaseFragment
 import com.studio.king.demomovie.databinding.FragHomeBinding
 import com.studio.king.demomovie.databinding.ToolbarHomeBinding
+import com.studio.king.demomovie.model.GenresModel
 import com.studio.king.demomovie.model.LayoutUIModel
+import com.studio.king.demomovie.model.MovieModel
+import com.studio.king.demomovie.navigator.NavigatorScreen
 import com.studio.king.demomovie.utils.LogUtil
 import com.studio.king.demomovie.utils.TypeDataHome
 import com.studio.king.demomovie.utils.setSingleClick
+import com.studio.king.demomovie.utils.showMessageDialog
 import com.studio.king.demomovie.viewmodel.HomeViewModel
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FragHome : BaseFragment<FragHomeBinding>() {
@@ -41,6 +46,8 @@ class FragHome : BaseFragment<FragHomeBinding>() {
             return fragment
         }
     }
+    private val mNavigatorScreen: NavigatorScreen by inject()
+
     private var bindingToolbar : ToolbarHomeBinding? = null
     private lateinit var mMainActivity: MainActivity
 
@@ -267,8 +274,10 @@ class FragHome : BaseFragment<FragHomeBinding>() {
     }
 
     private fun actionClickItem(data: Any?) {
-        if (data is LayoutUIModel) {
-
+        if (data is MovieModel) {
+            mNavigatorScreen.showFragDetailMovie(itemMovie = data)
+        } else if (data is GenresModel) {
+            showDialogAvailableSoon()
         }
     }
 

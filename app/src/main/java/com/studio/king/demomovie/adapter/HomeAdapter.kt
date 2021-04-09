@@ -29,11 +29,11 @@ class HomeAdapter(private val onActionItem: (data: Any?) -> Unit, private val on
 
             TypeLayoutHome.TYPE_LIST_GENRE -> {
                 val binding: ViewItemRecyclerviewGenreHolderBinding = ViewItemRecyclerviewGenreHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                LayoutListGenreHomeHolder(binding)
+                LayoutListGenreHomeHolder(binding, onActionItem)
             }
             TypeLayoutHome.TYPE_LIST_TRENDING -> {
                 val binding: ViewItemRecyclerviewTrendingHolderBinding = ViewItemRecyclerviewTrendingHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                LayoutListTrendingHomeHolder(binding)
+                LayoutListTrendingHomeHolder(binding, onActionItem)
             }
 
             else -> {

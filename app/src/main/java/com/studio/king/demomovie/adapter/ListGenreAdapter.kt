@@ -9,10 +9,10 @@ import com.studio.king.demomovie.adapter.holder.MovieHomeHolder
 import com.studio.king.demomovie.databinding.ViewItemGenreHomeHolderBinding
 import com.studio.king.demomovie.databinding.ViewItemMovieHomeHolderBinding
 
-class ListGenreAdapter : BaseAdapterAny() {
+class ListGenreAdapter(private val onActionItem: (data: Any?) -> Unit) : BaseAdapterAny() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LifecycleViewHolder {
         val binding: ViewItemGenreHomeHolderBinding = ViewItemGenreHomeHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return GenreHomeHolder(binding)
+        return GenreHomeHolder(binding, onActionItem)
     }
 }
 

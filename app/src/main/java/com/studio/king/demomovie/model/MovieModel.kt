@@ -1,6 +1,6 @@
 package com.studio.king.demomovie.model
 
-class MovieModel(
+data class MovieModel(
     var poster_path : String? = null,
     var adult : Boolean? = null,
     var backdrop_path : String? = null,

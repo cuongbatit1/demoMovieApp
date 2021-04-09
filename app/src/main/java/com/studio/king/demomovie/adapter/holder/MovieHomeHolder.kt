@@ -1,20 +1,16 @@
 package com.studio.king.demomovie.adapter.holder
 
-import com.squareup.picasso.NetworkPolicy
-import com.squareup.picasso.Picasso
 import com.studio.king.demomovie.R
 import com.studio.king.demomovie.adapter.base.BaseAdapterAny
 import com.studio.king.demomovie.adapter.base.LifecycleViewHolder
 import com.studio.king.demomovie.databinding.ViewItemMovieHomeHolderBinding
-import com.studio.king.demomovie.databinding.ViewItemTitleHolderBinding
 import com.studio.king.demomovie.model.MovieModel
-import com.studio.king.demomovie.model.TitleModel
 import com.studio.king.demomovie.model.getPosterPath
 import com.studio.king.demomovie.provider.PicassoProvider
+import com.studio.king.demomovie.utils.setSingleClick
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
-class MovieHomeHolder(itemView: ViewItemMovieHomeHolderBinding) : LifecycleViewHolder(itemView.root),
+class MovieHomeHolder(itemView: ViewItemMovieHomeHolderBinding, private val onActionItem: (data: Any?) -> Unit) : LifecycleViewHolder(itemView.root),
     KoinComponent {
 
     private val binding: ViewItemMovieHomeHolderBinding = itemView
@@ -28,6 +24,7 @@ class MovieHomeHolder(itemView: ViewItemMovieHomeHolderBinding) : LifecycleViewH
             mMovieModel = t
             buildUITitle()
             buildUIImage()
+            buildUIClickItem()
         }
 
     }
@@ -41,6 +38,12 @@ class MovieHomeHolder(itemView: ViewItemMovieHomeHolderBinding) : LifecycleViewH
             PicassoProvider.get().load(mMovieModel?.getPosterPath()).fit().placeholder(R.drawable.placeholder).error(R.drawable.image_error).into(binding.imageMovieHome)
         } else {
             binding.imageMovieHome.setImageResource(R.drawable.image_error)
+        }
+    }
+
+    private fun buildUIClickItem() {
+        binding.layoutImageMovieHome.setSingleClick {
+            onActionItem.invoke(mMovieModel)
         }
     }
 }

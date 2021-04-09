@@ -17,7 +17,7 @@ import com.studio.king.demomovie.utils.LogUtil
 import org.koin.core.component.KoinComponent
 
 
-class LayoutListGenreHomeHolder(itemView: ViewItemRecyclerviewGenreHolderBinding) : LifecycleViewHolder(
+class LayoutListGenreHomeHolder(itemView: ViewItemRecyclerviewGenreHolderBinding, private val onActionItem: (data: Any?) -> Unit) : LifecycleViewHolder(
     itemView.root
 ),
     KoinComponent {
@@ -80,7 +80,7 @@ class LayoutListGenreHomeHolder(itemView: ViewItemRecyclerviewGenreHolderBinding
         }
     }
 
-    private val mListGenreAdapter: ListGenreAdapter by lazy { ListGenreAdapter() }
+    private val mListGenreAdapter: ListGenreAdapter by lazy { ListGenreAdapter(onActionItem) }
 
     override fun setData(
         t: Any?,
@@ -106,4 +106,6 @@ class LayoutListGenreHomeHolder(itemView: ViewItemRecyclerviewGenreHolderBinding
 
         mListGenreAdapter.mList = mLayoutGenreUIModel?.listGenres as MutableList<Any>?
     }
+
+
 }

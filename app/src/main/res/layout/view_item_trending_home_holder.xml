@@ -18,7 +18,8 @@
         app:cardElevation="0dp"
         app:cardMaxElevation="0dp"
         app:cardCornerRadius="@dimen/_6dp"
-        tools:cardBackgroundColor="@color/red">
+        tools:cardBackgroundColor="@color/red"
+        android:foreground="?selectableItemBackground">
 
         <ImageView
             android:id="@+id/image_trending_home"

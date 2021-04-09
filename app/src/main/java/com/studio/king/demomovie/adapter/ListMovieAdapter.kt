@@ -13,12 +13,12 @@ import com.studio.king.demomovie.model.TitleModel
 import com.studio.king.demomovie.utils.TypeLayoutHome
 import com.studio.king.demomovie.utils.TypeLayoutMovie
 
-class ListMovieAdapter : BaseAdapterAny() {
+class ListMovieAdapter(private val onActionItem: (data: Any?) -> Unit) : BaseAdapterAny() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LifecycleViewHolder {
         return when (viewType) {
             TypeLayoutMovie.TYPE_MOVIE -> {
                 val binding: ViewItemMovieHomeHolderBinding = ViewItemMovieHomeHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                MovieHomeHolder(binding)
+                MovieHomeHolder(binding, onActionItem)
             }
 
             TypeLayoutMovie.TYPE_LOAD_MORE -> {

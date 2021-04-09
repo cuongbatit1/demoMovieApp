@@ -16,5 +16,14 @@
     <string name="key_upcoming">Upcoming</string>
     <string name="txt_notification_title">Notifications</string>
     <string name="this_feature_will_be_available_soon">This feature will be available soon</string>
-
+    <string name="key_us">US</string>
+    <string name="key_action">Action</string>
+    <string name="key_read_more">Read more</string>
+    <string name="key_favorite">Favorite</string>
+    <string name="key_write_a_comment">Write a comment</string>
+    <string name="key_your_rate">Your Rate</string>
+    <string name="key_series_cast">Series Cast</string>
+    <string name="key_video">Video</string>
+    <string name="key_comments">Comments</string>
+    <string name="key_recomendations">Recomendations</string>
 </resources>

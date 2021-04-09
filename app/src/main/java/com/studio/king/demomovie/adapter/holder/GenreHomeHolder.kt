@@ -6,11 +6,12 @@ import com.studio.king.demomovie.adapter.base.LifecycleViewHolder
 import com.studio.king.demomovie.databinding.ViewItemGenreHomeHolderBinding
 import com.studio.king.demomovie.model.GenresModel
 import com.studio.king.demomovie.utils.LogUtil
+import com.studio.king.demomovie.utils.setSingleClick
 import org.koin.core.component.KoinComponent
 import java.security.SecureRandom
 import kotlin.random.Random
 
-class GenreHomeHolder(itemView: ViewItemGenreHomeHolderBinding) : LifecycleViewHolder(itemView.root),
+class GenreHomeHolder(itemView: ViewItemGenreHomeHolderBinding, private val onActionItem: (data: Any?) -> Unit) : LifecycleViewHolder(itemView.root),
     KoinComponent {
 
     private val binding: ViewItemGenreHomeHolderBinding = itemView
@@ -24,6 +25,7 @@ class GenreHomeHolder(itemView: ViewItemGenreHomeHolderBinding) : LifecycleViewH
             mGenresModel = t
             buildUITitle()
             buildUIBackground()
+            buildUIClickItem()
         }
 
     }
@@ -43,6 +45,12 @@ class GenreHomeHolder(itemView: ViewItemGenreHomeHolderBinding) : LifecycleViewH
             2 -> {
                 binding.imageGenreHome.setBackgroundResource(R.drawable.gradient_type_3)
             }
+        }
+    }
+
+    private fun buildUIClickItem() {
+        binding.layoutImageGenreHome.setSingleClick {
+            onActionItem.invoke(mGenresModel)
         }
     }
 }

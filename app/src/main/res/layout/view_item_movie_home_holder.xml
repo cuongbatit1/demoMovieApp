@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="140dp"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/layout_image_movie_home"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/text_title_movie_home"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardElevation="@dimen/_5dp"
+        app:cardCornerRadius="@dimen/_6dp"
+        tools:cardBackgroundColor="@color/red"
+        android:layout_marginBottom="@dimen/_10dp">
+
+        <ImageView
+            android:id="@+id/image_movie_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/text_title_movie_home"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/icon_title_movie_home"
+        tools:text="None Holder"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:fontFamily="@font/opensans_bold"
+        android:gravity="center|top"
+        android:textColor="@color/color_3E4A59"
+        android:textSize="12sp"/>
+    
+    <ImageView
+        android:id="@+id/icon_title_movie_home"
+        android:layout_width="@dimen/_5dp"
+        android:layout_height="@dimen/_18dp"
+        app:layout_constraintTop_toTopOf="@id/text_title_movie_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/ic_moredetails"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

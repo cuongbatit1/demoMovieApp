@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:orientation="horizontal"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_user_toolbar_home"
+        android:layout_width="@dimen/_22dp"
+        android:layout_height="@dimen/_22dp"
+        card_view:contentPadding="0dp"
+        card_view:cardElevation="0dp"
+        card_view:cardCornerRadius="@dimen/_11dp"
+        app:cardBackgroundColor="@color/transparent"
+        android:layout_gravity="left|center"
+        android:foreground="?attr/selectableItemBackground"
+        local:layout_constraintTop_toTopOf="parent"
+        local:layout_constraintLeft_toLeftOf="parent"
+        local:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/_16dp">
+        <ImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_user_main_page"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/icon_toolbar_home"
+        android:layout_width="@dimen/_35dp"
+        android:layout_height="@dimen/_27dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo_splash"
+        local:layout_constraintEnd_toStartOf="@id/btn_search_toolbar_home"
+        local:layout_constraintStart_toEndOf="@id/btn_user_toolbar_home"
+        local:layout_constraintTop_toTopOf="parent"
+        local:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_search_toolbar_home"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        card_view:contentPadding="0dp"
+        card_view:cardElevation="0dp"
+        app:cardBackgroundColor="@color/transparent"
+        android:foreground="?attr/selectableItemBackground"
+        local:layout_constraintTop_toTopOf="parent"
+        local:layout_constraintEnd_toEndOf="parent"
+        local:layout_constraintBottom_toBottomOf="parent">
+        <ImageView
+
+            android:layout_width="@dimen/_22dp"
+            android:layout_height="@dimen/_22dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_search_color"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

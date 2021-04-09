@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">DemoMovie</string>
+    <string name="key_please_click_back_again_to_exit">Please click BACK again to exit</string>
+    <string name="key_txt_ok_title">OK</string>
+    <string name="key_no_internet_connection">No Internet Connection</string>
+    <string name="default_notification_channel_id" translatable="false">default_notification_channel_id</string>
+    <string name="key_default_notification_channel_name">Movie Notification</string>
+    <string name="value_ratio_logo_splash" translatable="false">38:27</string>
+    <string name="value_ratio_popular" translatable="false">360:260</string>
+    <string name="value_ratio_genre" translatable="false">360:77</string>
+    <string name="value_ratio_trending" translatable="false">360:160</string>
+    <string name="key_trending">Trending</string>
+    <string name="key_genre">Genre</string>
+    <string name="key_popular">Popular</string>
+    <string name="key_top_rated">Top rated</string>
+    <string name="key_upcoming">Upcoming</string>
+    <string name="txt_notification_title">Notifications</string>
+    <string name="this_feature_will_be_available_soon">This feature will be available soon</string>
+
+</resources>

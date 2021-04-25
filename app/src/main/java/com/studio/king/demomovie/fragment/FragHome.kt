@@ -23,6 +23,7 @@ import com.studio.king.demomovie.utils.TypeDataHome
 import com.studio.king.demomovie.utils.setSingleClick
 import com.studio.king.demomovie.utils.showMessageDialog
 import com.studio.king.demomovie.viewmodel.HomeViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -269,6 +270,9 @@ class FragHome : BaseFragment<FragHomeBinding>() {
                 TypeDataHome.TYPE_POPULAR -> {
                     loadMorePopular()
                 }
+                TypeDataHome.TYPE_TRENDING -> {
+                    loadMoreTrending()
+                }
             }
         }
     }
@@ -367,6 +371,37 @@ class FragHome : BaseFragment<FragHomeBinding>() {
                 // but propagated up to the scope
                 showDialogException(e)
                 mHomeViewModel.isLoadDataUpcoming = false
+            }
+        }
+    }
+
+    private fun loadMoreTrending() {
+        LogUtil.e("loadMoreTrending")
+        uiScope.launch {
+            try {
+                if (!mHomeViewModel.checkLoadMoreTrending()) {
+                    LogUtil.e("loadMoreTrending call api ")
+                    val indexLoad = mHomeViewModel.getIndexTrending()
+                    mHomeViewModel.updateLoadMoreTrending()
+                    if (indexLoad != null && indexLoad >= 0) {
+                        mHomeAdapter.notifyItemChanged(indexLoad)
+                    } else {
+                        mHomeAdapter.notifyDataSetChanged()
+                    }
+                    delay(5000)
+                    val data = mHomeViewModel.taskLoadListTrendingApi()
+                    if (indexLoad != null && indexLoad >= 0) {
+                        mHomeAdapter.notifyItemChanged(indexLoad)
+                    } else {
+                        mHomeAdapter.notifyDataSetChanged()
+                    }
+                    mHomeViewModel.isLoadDataTrending = false
+                }
+            } catch (e: Exception) {
+                // Exception thrown in async WILL NOT be caught here
+                // but propagated up to the scope
+                showDialogException(e)
+                mHomeViewModel.isLoadDataTrending = false
             }
         }
     }

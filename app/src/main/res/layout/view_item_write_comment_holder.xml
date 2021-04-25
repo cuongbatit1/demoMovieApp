@@ -57,6 +57,7 @@
         app:cardMaxElevation="0dp"
         app:cardCornerRadius="@dimen/_6dp"
         android:foreground="?selectableItemBackground"
+        android:layout_marginTop="14dp"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout

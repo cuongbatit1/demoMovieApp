@@ -14,26 +14,27 @@ import com.studio.king.demomovie.adapter.base.BaseAdapterAny
 import com.studio.king.demomovie.adapter.base.LifecycleViewHolder
 import com.studio.king.demomovie.base.ViewPager2PageChangeCallback
 import com.studio.king.demomovie.databinding.ViewItemRecyclerviewTrendingHolderBinding
+import com.studio.king.demomovie.databinding.ViewItemRecyclerviewVideoDetailHolderBinding
 import com.studio.king.demomovie.model.LayoutUIModel
 import com.studio.king.demomovie.utils.LogUtil
 import org.koin.core.component.KoinComponent
 
 
-class LayoutListTrendingHomeHolder(itemView: ViewItemRecyclerviewTrendingHolderBinding, private val onActionItem: (data: Any?) -> Unit, private val onActionLoadMore: (data: Any?) -> Unit) : LifecycleViewHolder(
+class LayoutListVideoDetailHolder(itemView: ViewItemRecyclerviewVideoDetailHolderBinding, private val onActionItem: (data: Any?) -> Unit, private val onActionLoadMore: (data: Any?) -> Unit) : LifecycleViewHolder(
     itemView.root
 ),
     KoinComponent {
 
-    private val binding: ViewItemRecyclerviewTrendingHolderBinding = itemView
+    private val binding: ViewItemRecyclerviewVideoDetailHolderBinding = itemView
     private var mLayoutUIModel: LayoutUIModel? = null
 
     private val mViewPager2: ViewPager2 by lazy {
-        binding.ViewPager2ItemListTrending.apply {
+        binding.ViewPager2ItemVideoDetail.apply {
             if (itemDecorationCount == 0) {
                 offscreenPageLimit = 1
                 val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin)
                 val offsetPx = resources.getDimensionPixelOffset(R.dimen.offset)
-                val total = context.resources.getDimensionPixelOffset(R.dimen._60dp)
+                val total = context.resources.getDimensionPixelOffset(R.dimen._160dp)
                 setPageTransformer { page, position ->
                     val viewPager = page.parent.parent as ViewPager2
                     val offset = position * -total
@@ -58,7 +59,7 @@ class LayoutListTrendingHomeHolder(itemView: ViewItemRecyclerviewTrendingHolderB
                         val position = parent.getChildAdapterPosition(view)
                         val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin)
                         val offsetPx = resources.getDimensionPixelOffset(R.dimen.offset)
-                        val all = context.resources.getDimensionPixelOffset(R.dimen._60dp)
+                        val all = context.resources.getDimensionPixelOffset(R.dimen._160dp)
                         when (position) {
                             0 -> {
                                 outRect.left = offsetPx

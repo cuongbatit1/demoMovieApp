@@ -21,6 +21,8 @@ class RateDetailHolder(itemView: ViewItemRateHolderBinding) : LifecycleViewHolde
             buildUITextRatingBar()
             buildUIRatingBar()
             buildUITextTime()
+            buildUITextAction()
+            buildUITextUS()
         }
 
     }
@@ -35,5 +37,13 @@ class RateDetailHolder(itemView: ViewItemRateHolderBinding) : LifecycleViewHolde
 
     private fun buildUITextTime() {
         binding.textTimeItemRate.text = mRateDetailModel?.textTime ?: ""
+    }
+
+    private fun buildUITextAction() {
+        binding.tvActionItemRate.text = mRateDetailModel?.genres ?: ""
+    }
+
+    private fun buildUITextUS() {
+        binding.tvUsItemRate.text = mRateDetailModel?.textIOS ?: ""
     }
 }

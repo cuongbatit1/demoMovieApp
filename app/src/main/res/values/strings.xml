@@ -9,6 +9,8 @@
     <string name="value_ratio_popular" translatable="false">360:260</string>
     <string name="value_ratio_genre" translatable="false">360:77</string>
     <string name="value_ratio_trending" translatable="false">360:160</string>
+    <string name="value_ratio_video" translatable="false">360:120</string>
+    <string name="value_ratio_cast" translatable="false">360:140</string>
     <string name="key_trending">Trending</string>
     <string name="key_genre">Genre</string>
     <string name="key_popular">Popular</string>

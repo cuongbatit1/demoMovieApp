@@ -20,8 +20,10 @@ import com.studio.king.demomovie.databinding.ToolbarHomeBinding
 import com.studio.king.demomovie.model.*
 import com.studio.king.demomovie.provider.PicassoProvider
 import com.studio.king.demomovie.utils.LogUtil
+import com.studio.king.demomovie.utils.TypeDataHome
 import com.studio.king.demomovie.utils.showMessageDialog
 import com.studio.king.demomovie.viewmodel.DetailMovieViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -300,6 +302,16 @@ class FragDetailMovie : BaseFragment<FragDetailMovieBinding>() {
 
 
     private fun actionLoadMore(data: Any?) {
+        if (data is LayoutUIModel) {
+            when (data.typeData) {
+                TypeDataHome.TYPE_RECOMMENDATIONS -> {
+                    loadMoreRecommendations()
+                }
+                TypeDataHome.TYPE_VIDEO -> {
+                    loadMoreVideo()
+                }
+            }
+        }
     }
 
     private fun actionClickItem(data: Any?) {
@@ -312,5 +324,65 @@ class FragDetailMovie : BaseFragment<FragDetailMovieBinding>() {
 
     private fun actionReadMore(data: Any?) {
 
+    }
+
+    private fun loadMoreRecommendations() {
+        LogUtil.e("loadMoreRecommendations")
+        uiScope.launch {
+            try {
+                if (!mDetailMovieViewModel.checkLoadMoreRecommendations()) {
+                    LogUtil.e("loadMoreUpcoming call api ")
+                    val indexLoad = mDetailMovieViewModel.getIndexRecommendations()
+                    mDetailMovieViewModel.updateLoadMoreRecommendations()
+                    if (indexLoad != null && indexLoad >= 0) {
+                        mDetailMovieAdapter.notifyItemChanged(indexLoad)
+                    } else {
+                        mDetailMovieAdapter.notifyDataSetChanged()
+                    }
+                    val data = mDetailMovieViewModel.taskLoadListRecommendationsApi()
+                    if (indexLoad != null && indexLoad >= 0) {
+                        mDetailMovieAdapter.notifyItemChanged(indexLoad)
+                    } else {
+                        mDetailMovieAdapter.notifyDataSetChanged()
+                    }
+                    mDetailMovieViewModel.isLoadDataRecommendations = false
+                }
+            } catch (e: Exception) {
+                // Exception thrown in async WILL NOT be caught here
+                // but propagated up to the scope
+                showDialogException(e)
+                mDetailMovieViewModel.isLoadDataRecommendations = false
+            }
+        }
+    }
+
+    private fun loadMoreVideo() {
+        LogUtil.e("loadMoreVideo")
+        uiScope.launch {
+            try {
+                if (!mDetailMovieViewModel.checkLoadMoreVideo()) {
+                    LogUtil.e("loadMoreUpcoming call api ")
+                    val indexLoad = mDetailMovieViewModel.getIndexVideo()
+                    mDetailMovieViewModel.updateLoadMoreVideo()
+                    if (indexLoad != null && indexLoad >= 0) {
+                        mDetailMovieAdapter.notifyItemChanged(indexLoad)
+                    } else {
+                        mDetailMovieAdapter.notifyDataSetChanged()
+                    }
+                    val data = mDetailMovieViewModel.taskLoadListVideoApi()
+                    if (indexLoad != null && indexLoad >= 0) {
+                        mDetailMovieAdapter.notifyItemChanged(indexLoad)
+                    } else {
+                        mDetailMovieAdapter.notifyDataSetChanged()
+                    }
+                    mDetailMovieViewModel.isLoadDataVideo = false
+                }
+            } catch (e: Exception) {
+                // Exception thrown in async WILL NOT be caught here
+                // but propagated up to the scope
+                showDialogException(e)
+                mDetailMovieViewModel.isLoadDataVideo = false
+            }
+        }
     }
 }

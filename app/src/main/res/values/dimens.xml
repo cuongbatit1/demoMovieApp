@@ -29,6 +29,7 @@
     <dimen name="_60dp">60dp</dimen>
     <dimen name="_75dp">75dp</dimen>
     <dimen name="_76dp">76dp</dimen>
+    <dimen name="_160dp">160dp</dimen>
     <dimen name="pageMargin">20dp</dimen>
     <dimen name="offset">16dp</dimen>
     <dimen name="pageMarginAndOffset">36dp</dimen>

@@ -32,8 +32,10 @@ class HomeViewModel(private val mHomeRepository: HomeRepository) : ViewModel(), 
     private val mLayoutGenreUIModel: LayoutGenreUIModel by lazy { LayoutGenreUIModel() }
 
     private val mLayoutTrending: LayoutUIModel by lazy { LayoutUIModel().apply {
+        page = 1
         layoutType = 1
         typeData = TypeDataHome.TYPE_TRENDING
+        isScrollEnd = false
     } }
 
     private val mLayoutPopular: LayoutUIModel by lazy {
@@ -66,6 +68,7 @@ class HomeViewModel(private val mHomeRepository: HomeRepository) : ViewModel(), 
     var isLoadDataPopular : Boolean = false
     var isLoadDataTopRated : Boolean = false
     var isLoadDataUpcoming : Boolean = false
+    var isLoadDataTrending : Boolean = false
 
     val typeStringLoadMorePopular = TypeLayoutString.TYPE_LOAD_MORE
 
@@ -236,18 +239,25 @@ class HomeViewModel(private val mHomeRepository: HomeRepository) : ViewModel(), 
         }
     }
 
-    private suspend fun taskLoadListTrendingApi(): Any? {
+    suspend fun taskLoadListTrendingApi(): Any? {
         return withContext(bgDispatcher) {
 
-            val dataResult = mHomeRepository.getListTrending()
+            val dataResult = mHomeRepository.getListTrending("${mLayoutTrending.page ?: 1}")
             if (dataResult is TrendingModelDTO) {
-                mLayoutTrending.listMovie = dataResult.results as MutableList<Any>?
+                if (mLayoutTrending.listMovie == null) {
+                    mLayoutTrending.listMovie = mutableListOf()
+                }
+                if (mLayoutTrending.listMovie != null && mLayoutTrending.listMovie!!.contains(typeStringLoadMorePopular)) {
+                    mLayoutTrending.listMovie?.remove(typeStringLoadMorePopular)
+                }
+                mLayoutTrending.isScrollEnd = false
+                dataResult.results?.let { mLayoutTrending.listMovie?.addAll(it) }
                 if (mLayoutTrending.totalPage == null) {
                     mLayoutTrending.totalPage = dataResult.total_pages
                 }
                 mLayoutTrending.page?.let {
                     if (mLayoutTrending.totalPage != null) {
-                        if (it < mLayoutTrending.totalPage!!) {
+                        if (it <= mLayoutTrending.totalPage!!) {
                             mLayoutTrending.page = it + 1
                         }
                     } else {
@@ -277,7 +287,7 @@ class HomeViewModel(private val mHomeRepository: HomeRepository) : ViewModel(), 
                 }
                 mLayoutPopular.page?.let {
                     if (mLayoutPopular.totalPage != null) {
-                        if (it < mLayoutPopular.totalPage!!) {
+                        if (it <= mLayoutPopular.totalPage!!) {
                             mLayoutPopular.page = it + 1
                         }
                     } else {
@@ -307,7 +317,7 @@ class HomeViewModel(private val mHomeRepository: HomeRepository) : ViewModel(), 
                 }
                 mLayoutTopRated.page?.let {
                     if (mLayoutTopRated.totalPage != null) {
-                        if (it < mLayoutTopRated.totalPage!!) {
+                        if (it <= mLayoutTopRated.totalPage!!) {
                             mLayoutTopRated.page = it + 1
                         }
                     } else {
@@ -322,7 +332,7 @@ class HomeViewModel(private val mHomeRepository: HomeRepository) : ViewModel(), 
     suspend fun taskLoadListUpcomingApi(): Any? {
         return withContext(bgDispatcher) {
 
-            val dataResult = mHomeRepository.getListTopRated("${mLayoutUpcoming.page ?: 1}")
+            val dataResult = mHomeRepository.getListUpcoming("${mLayoutUpcoming.page ?: 1}")
             if (dataResult is TrendingModelDTO) {
                 if (mLayoutUpcoming.listMovie == null) {
                     mLayoutUpcoming.listMovie = mutableListOf()
@@ -337,7 +347,7 @@ class HomeViewModel(private val mHomeRepository: HomeRepository) : ViewModel(), 
                 }
                 mLayoutUpcoming.page?.let {
                     if (mLayoutUpcoming.totalPage != null) {
-                        if (it < mLayoutUpcoming.totalPage!!) {
+                        if (it <= mLayoutUpcoming.totalPage!!) {
                             mLayoutUpcoming.page = it + 1
                         }
                     } else {
@@ -351,7 +361,7 @@ class HomeViewModel(private val mHomeRepository: HomeRepository) : ViewModel(), 
 
     // Start function Load more Popular
     fun checkLoadMorePopular() : Boolean {
-        return if (mLayoutPopular.page != null && mLayoutPopular.totalPage != null && mLayoutPopular.page!! >= mLayoutPopular.totalPage!!) {
+        return if (mLayoutPopular.page != null && mLayoutPopular.totalPage != null && mLayoutPopular.page!! > mLayoutPopular.totalPage!!) {
             true
         } else isLoadDataPopular
     }
@@ -372,7 +382,7 @@ class HomeViewModel(private val mHomeRepository: HomeRepository) : ViewModel(), 
 
     // Start function Load more Top Rated
     fun checkLoadMoreTopRated() : Boolean {
-        return if (mLayoutTopRated.page != null && mLayoutTopRated.totalPage != null && mLayoutTopRated.page!! >= mLayoutTopRated.totalPage!!) {
+        return if (mLayoutTopRated.page != null && mLayoutTopRated.totalPage != null && mLayoutTopRated.page!! > mLayoutTopRated.totalPage!!) {
             true
         } else isLoadDataTopRated
     }
@@ -393,7 +403,7 @@ class HomeViewModel(private val mHomeRepository: HomeRepository) : ViewModel(), 
 
     // Start function Load more Upcoming
     fun checkLoadMoreUpcoming() : Boolean {
-        return if (mLayoutUpcoming.page != null && mLayoutUpcoming.totalPage != null && mLayoutUpcoming.page!! >= mLayoutUpcoming.totalPage!!) {
+        return if (mLayoutUpcoming.page != null && mLayoutUpcoming.totalPage != null && mLayoutUpcoming.page!! > mLayoutUpcoming.totalPage!!) {
             true
         } else isLoadDataUpcoming
     }
@@ -411,4 +421,25 @@ class HomeViewModel(private val mHomeRepository: HomeRepository) : ViewModel(), 
         return mArrayShowLayout?.indexOf(mLayoutUpcoming)
     }
     // End function Load more Upcoming
+
+    // Start function Load more Trending
+    fun checkLoadMoreTrending() : Boolean {
+        return if (mLayoutTrending.page != null && mLayoutTrending.totalPage != null && mLayoutTrending.page!! > mLayoutTrending.totalPage!!) {
+            true
+        } else isLoadDataTrending
+    }
+
+    fun updateLoadMoreTrending() {
+        isLoadDataTrending = true
+        if (mLayoutTrending.listMovie != null && mLayoutTrending.listMovie!!.contains(typeStringLoadMorePopular)) {
+            mLayoutTrending.listMovie?.remove(typeStringLoadMorePopular)
+        }
+        mLayoutTrending.listMovie?.add(typeStringLoadMorePopular)
+        mLayoutTrending.isScrollEnd = true
+    }
+
+    fun getIndexTrending() : Int? {
+        return mArrayShowLayout?.indexOf(mLayoutTrending)
+    }
+    // End function Load more Trending
 }

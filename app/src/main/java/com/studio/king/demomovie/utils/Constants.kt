@@ -37,6 +37,10 @@ interface TypeLayoutDetailMovie {
         const val TYPE_RATE = 1
         const val TYPE_TITLE_DETAIL = 2
         const val TYPE_WRITE_A_COMMENT = 3
+        const val TYPE_LIST_MOVIE = 4
+        const val TYPE_LIST_VIDEO = 5
+        const val TYPE_LIST_CAST = 6
+        const val TYPE_LAYOUT_COMMENT = 7
     }
 }
 
@@ -51,7 +55,10 @@ enum class TypeDataHome {
     TYPE_POPULAR,
     TYPE_TOP_RATED,
     TYPE_UPCOMING,
-    TYPE_TRENDING
+    TYPE_TRENDING,
+    TYPE_RECOMMENDATIONS,
+    TYPE_VIDEO,
+    TYPE_CAST
 }
 
 interface KeyWordParam {
@@ -65,6 +72,8 @@ interface KeyWordParam {
 interface KeyWordJson {
     companion object {
         const val GENRES = "genres"
+        const val CAST = "cast"
+
     }
 }
 

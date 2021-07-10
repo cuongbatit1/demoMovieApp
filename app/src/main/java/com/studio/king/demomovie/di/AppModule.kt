@@ -1,7 +1,6 @@
 package com.studio.king.demomovie.di
 
 import com.google.gson.GsonBuilder
-import com.squareup.picasso.Picasso
 import com.studio.king.demomovie.navigator.NavigatorScreen
 import org.koin.android.ext.koin.androidApplication
 import org.koin.core.qualifier.named

@@ -51,9 +51,9 @@ class DetailMovieAdapter(private val onActionItem: (data: Any?) -> Unit, private
                 LayoutCastHolder(binding, onActionItem)
             }
 
-            TypeLayoutDetailMovie.TYPE_LAYOUT_COMMENT -> {
-
-            }
+//            TypeLayoutDetailMovie.TYPE_LAYOUT_COMMENT -> {
+//
+//            }
 
             else -> {
                 val binding: ViewItemNoneHolderBinding = ViewItemNoneHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false)

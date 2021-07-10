@@ -17,7 +17,6 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import org.koin.experimental.property.inject
 
 class HomeViewModel(private val mHomeRepository: HomeRepository) : ViewModel(), KoinComponent {
 

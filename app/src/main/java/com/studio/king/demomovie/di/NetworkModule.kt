@@ -1,8 +1,6 @@
 package com.studio.king.demomovie.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.squareup.picasso.OkHttp3Downloader
-import com.squareup.picasso.Picasso
 import com.studio.king.demomovie.BuildConfig
 import com.studio.king.demomovie.network.api.ApiService
 import com.studio.king.demomovie.network.interceptor.HeaderInterceptor
@@ -70,7 +68,7 @@ val networkModule = module {
     single { Retrofit.Builder()
         .baseUrl(Constants.BASE_URL)
 //        .addCallAdapterFactory(NetworkResponseAdapterFactory())
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+//        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .addConverterFactory(GsonConverterFactory.create())
         .client(get())
         .build() }
